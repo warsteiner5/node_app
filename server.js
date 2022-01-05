@@ -67,6 +67,7 @@ app.get("/api/status", function (req, res) {
  *  GET: finds all products
  */
 app.get("/api/products", function (req, res) {
+    console.log('api -> GET: /api/products/');
     database.collection(PRODUCTS_COLLECTION).find({}).toArray(function (error, data) {
         if (error) {
             manageError(res, err.message, "Failed to get contacts.");
@@ -80,6 +81,7 @@ app.get("/api/products", function (req, res) {
  *  GET: finds all products
  */
 app.get("/api/products/:id", function (req, res) {
+    console.log('api -> GET: /api/products/:id');
     database.collection(PRODUCTS_COLLECTION).find({ _id: new ObjectID(req.params.id) }).toArray(function (error, data) {
         if (error) {
             manageError(res, err.message, "Failed to get contacts.");
@@ -93,6 +95,7 @@ app.get("/api/products/:id", function (req, res) {
  *   POST: creates a new product
  */
 app.post("/api/products", function (req, res) {
+    console.log('api -> POST: /api/products');
     var product = req.body;
     if (!product.name) {
         manageError(res, "Invalid product input", "Name is mandatory.", 400);
@@ -125,6 +128,7 @@ app.post("/api/products", function (req, res) {
  *   DELETE: deletes product by id
  */
 app.delete("/api/products/:id", function (req, res) {
+    console.log('api -> DELETE: /api/products/:id');
     if (req.params.id.length > 24 || req.params.id.length < 24) {
         manageError(res, "Invalid product id", "ID must be a single String of 12 bytes or a string of 24 hex characters.", 400);
     } else {
