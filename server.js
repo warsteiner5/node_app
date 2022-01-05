@@ -36,6 +36,10 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI || LOCAL_DATABASE,
     {
         useUnifiedTopology: true,
         useNewUrlParser: true,
+        auth: {
+            username: 'admin',
+            password: 'ddtpwtxmx7'
+        }
     }, function (error, client) {
 
         // Check if there are any problems with the connection to MongoDB database.
