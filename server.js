@@ -35,11 +35,7 @@ const LOCAL_PORT = 8080;
 mongodb.MongoClient.connect(process.env.MONGODB_URI || LOCAL_DATABASE,
     {
         useUnifiedTopology: true,
-        useNewUrlParser: true,
-        auth: {
-            username: 'admin',
-            password: 'ddtpwtxmx7'
-        }
+        useNewUrlParser: true
     }, function (error, client) {
 
         // Check if there are any problems with the connection to MongoDB database.
@@ -132,7 +128,7 @@ app.delete("/api/products/:id", function (req, res) {
     if (req.params.id.length > 24 || req.params.id.length < 24) {
         manageError(res, "Invalid product id", "ID must be a single String of 12 bytes or a string of 24 hex characters.", 400);
     } else {
-        database.collection(PRODUCTS_COLLECTION).deleteOne({ _id: new ObjectID(req.params.id) }, function (err, result) {
+        database.collection(PRODUCTS_COLLECTION).deleteOne({ _id: new ObjectID(req.params.id) }, function (err) {
             if (err) {
                 manageError(res, err.message, "Failed to delete product.");
             } else {
